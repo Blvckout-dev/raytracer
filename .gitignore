@@ -1,3 +1,12 @@
+# VS Code
+.vscode
+
+# Image files
+*.ppm
+
+# Build folder
+build
+
 # Prerequisites
 *.d
 
