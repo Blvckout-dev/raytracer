@@ -4,9 +4,6 @@
 # Image files
 *.ppm
 
-# Build folder
-build
-
 # Prerequisites
 *.d
 
