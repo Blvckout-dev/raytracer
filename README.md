@@ -37,7 +37,7 @@ cd raytracer
 
 3. Configure the project with CMake:
 ```bash
-cmake -B build
+cmake -B build -DCMAKE_BUILD_TYPE=Release
 ```
 
 4. Build the project:
@@ -52,7 +52,13 @@ Once the project is built, you can run the raytracer:
 ### Windows
 
 ```bash
-./build/Release/raytracer.exe
+./bin/Release/raytracer.exe
+```
+
+### macOS/Linux
+
+```bash
+./bin/Release/raytracer
 ```
 
 ## Contact
