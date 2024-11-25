@@ -5,6 +5,9 @@
 #include <fstream>
 #include <cmath>
 
+// Mathematical constants
+#define M_PI 3.14159265358979323846 // pi
+
 Vec3 color(const Ray& ray, const Sphere& sphere) {
     if (sphere.hit(ray)) {
         return Vec3(1.0f, 0.0f, 0.0f); // Red
@@ -17,13 +20,19 @@ int main() {
     // Resolution
     constexpr int width { 480 };
     constexpr int height { 270 };
-    
     // Aspect raio
     constexpr float aspectRatio { static_cast<float>(width) / static_cast<float>(height) };
     
+    // Field of View
+    constexpr float fovDegress { 90.0f }; // Default: 90 | Limit fov between 1 and 179 when accepting user input
+    constexpr float fovRadians { fovDegress * static_cast<float>(M_PI) / 180.0f };
+    
     // Set viewport size
-    constexpr float viewportHeight { 1.0f };
+    constexpr float viewportHeight { 2.0f };
     constexpr float viewportWidth { viewportHeight * aspectRatio };
+
+    // Calculate focal length
+    float focalLength { viewportHeight / (2.0f * tan(fovRadians / 2.0f)) };
     
     // Output file
     std::ofstream out("output.ppm", std::ios::out);
@@ -38,10 +47,10 @@ int main() {
     out << "255\n";
 
     // Set ray origin
-    Vec3 origin(0.0f, 0.0f, 0.0f);
+    Vec3 origin(0.0f, 0.0f, -focalLength);
     
     // Anchor for direction calculation
-    Vec3 viewportLowerLeftCorner(-viewportWidth / 2, -viewportHeight / 2, 1);
+    Vec3 viewportLowerLeftCorner(-viewportWidth / 2, -viewportHeight / 2, 0);
 
     // Object
     Sphere sphere(Vec3(0.0f, 0.0f, 2.0f), 0.5f);
