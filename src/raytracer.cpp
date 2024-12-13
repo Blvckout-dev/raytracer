@@ -9,11 +9,13 @@
 #define M_PI 3.14159265358979323846 // pi
 
 Vec3 color(const Ray& ray, const Sphere& sphere) {
-    if (sphere.hit(ray)) {
-        return Vec3(1.0f, 0.0f, 0.0f); // Red
+    float t = sphere.hit(ray);
+    
+    if (t == 0.0f) {
+        return Vec3(0.0f, 0.0f, 0.0f); // black background
     }
 
-    return Vec3(0.0f, 0.0f, 0.0f); // black background
+    return Vec3(1.0f, 0.0f, 0.0f); // Red
 }
 
 int main() {
