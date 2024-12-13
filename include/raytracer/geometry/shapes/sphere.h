@@ -13,7 +13,11 @@ public:
 
     Sphere(const Vec3& center, float radius) : center(center), radius(radius) {}
 
-    bool hit(const Ray& ray) const;
+    /// <summary>
+    /// Check if ray intersects with surface
+    /// <returns>Distance from ray origin to sphere surface entry point</returns>
+    /// </summary>
+    float hit(const Ray& ray) const;
 };
 
 #endif
