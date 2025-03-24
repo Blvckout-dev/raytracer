@@ -1,22 +1,24 @@
 #include "raytracer/geometry/shapes/sphere.h"
 
+/// @brief Checks if a ray hits the surface
+/// @param ray 
+/// @return The distance between the ray origin and the surface entry point
 float Sphere::hit(const Ray& ray) const {
-    Vec3 oc = ray.origin - center; // Vector from ray.origin to sphere center
+    // Calculate the coefficients
+    float a = ray.direction.dot(ray.direction);
+    float b = 2 * ray.origin.dot(ray.direction);
+    float c = ray.origin.dot(ray.origin) - (radius * radius);
 
-    float t = oc.dot(ray.direction); // Closest ray pos to sphere center
-    float d2 = oc.dot(oc) - t * t;
-    float r2 = radius * radius;
-    
-    // Compare d^2 with r^2 to determin if the ray is able to hit the sphere at all
-    if (d2 > r2)
-        return 0.0f;
+    // Quadratic formula: -b * +-sqr(b^2 - 4ac) / 2 * a
+    // Discriminant: b^2 - 4ac
+    float discriminant = (b * b) - 4 * a * c;
 
-    // Ray is tangent to sphere
-    if (d2 == r2)
-        return t;
+    // No intersections when below 0
+    if (discriminant < 0)
+        return -1.f;
 
-    // float tEntry = t - std::sqrt(r2 - d2); // entry point
-    // float tExit = t + std::sqrt(r2 - d2); // exit point
+    float tEntry = (-b - sqrt(discriminant)) / (2 * a);
+    // float tExit = (-b + sqrt(discriminant)) / (2 * a);
 
-    return t - std::sqrt(r2 - d2); // entry point
+    return tEntry;
 }
