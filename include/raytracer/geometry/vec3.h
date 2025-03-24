@@ -12,6 +12,10 @@ public:
     Vec3() : x(0), y(0), z(0) {}
     Vec3(float x, float y, float z) : x(x), y(y), z(z) {}
 
+    Vec3 operator-() const {
+        return Vec3(-x, -y, -z);
+    }
+
     Vec3 operator+(const Vec3& other) const {
         return Vec3(x + other.x, y + other.y, z + other.z);
     }
@@ -22,6 +26,10 @@ public:
 
     Vec3 operator*(float t) const { 
         return Vec3(x * t, y * t, z * t);
+    }
+
+    Vec3 operator*(const Vec3& other) const {
+        return Vec3(x * other.x, y * other.y, z * other.z);
     }
 
     // Scalar product
