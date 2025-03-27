@@ -20,16 +20,24 @@ public:
         return Vec3(x + other.x, y + other.y, z + other.z);
     }
 
+    Vec3 operator-(float scalar) const {
+        return Vec3(x - scalar, y - scalar, z - scalar);
+    }
+
     Vec3 operator-(const Vec3& other) const {
         return Vec3(x - other.x, y - other.y, z - other.z);
     }
 
-    Vec3 operator*(float t) const { 
-        return Vec3(x * t, y * t, z * t);
+    Vec3 operator*(float scalar) const { 
+        return Vec3(x * scalar, y * scalar, z * scalar);
     }
 
     Vec3 operator*(const Vec3& other) const {
         return Vec3(x * other.x, y * other.y, z * other.z);
+    }
+
+    Vec3 operator/(float scalar) const {
+        return Vec3(x / scalar, y / scalar, z / scalar);
     }
 
     // Scalar product
