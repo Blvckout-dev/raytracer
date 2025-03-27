@@ -1,6 +1,7 @@
 #include "raytracer/geometry/vec3.h"
 #include "raytracer/geometry/ray.h"
 #include "raytracer/geometry/shapes/sphere.h"
+#include "raytracer/lights/light.h"
 #include <iostream>
 #include <fstream>
 #include <cmath>
@@ -8,14 +9,27 @@
 // Mathematical constants
 #define M_PI 3.14159265358979323846 // pi
 
-Vec3 color(const Ray& ray, const Sphere& sphere) {
+Vec3 color(const Ray& ray, const Sphere& sphere, const Light& light) {
+    // Base color of the sphere
+    Vec3 baseColor(1.0f, 0.0f, 0.0f);
+    
     float t = sphere.hit(ray);
     
-    if (t == 0.0f) {
+    if (t < 0.0f) {
         return Vec3(0.0f, 0.0f, 0.0f); // black background
     }
 
-    return Vec3(1.0f, 0.0f, 0.0f); // Red
+    // Intersection location
+    Vec3 intersection = ray.origin + ray.direction * t;
+
+    // Normalized direction vector from sphere.center to intersection location
+    Vec3 normal = (intersection - sphere.center).normalized();
+
+    // Angle between the light direction and the surface normal
+    float intensity = std::max(normal.dot(-light.direction), 0.0f) * light.intensity;
+
+    // Apply lighting effect (combine light color with intensity)
+    return baseColor * intensity;
 }
 
 int main() {
@@ -57,6 +71,9 @@ int main() {
     // Object
     Sphere sphere(Vec3(0.0f, 0.0f, 2.0f), 0.5f);
 
+    // Light
+    Light light(Vec3(1.0f, -1.0f, 0.0f));
+
     // Iterating over every pixel
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
@@ -65,14 +82,14 @@ int main() {
 
             // Calculate direction
             Vec3 direction { 
-                viewportLowerLeftCorner + Vec3(viewportWidth * widthPosPercent, 0, 0) // viewport x axis
-                + Vec3(0, viewportHeight * heightPosPercent, 0) // viewport y axis
-                - origin 
+                viewportLowerLeftCorner + Vec3(viewportWidth * widthPosPercent, 0, 0) + // viewport x axis
+                Vec3(0, viewportHeight * heightPosPercent, 0) - // viewport y axis
+                origin 
             };
 
             // Collision check/color calculation
-            Ray ray(origin, direction.normalized());
-            Vec3 col = color(ray, sphere);
+            Ray ray(origin, direction);
+            Vec3 col = color(ray, sphere, light);
 
             // Convert color intensity from percent to 8-bit color depth
             int ir = static_cast<int>(255.99f * col.x);
