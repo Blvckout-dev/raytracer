@@ -64,9 +64,6 @@ int main() {
 
     // Set ray origin
     Vec3 origin(0.0f, 0.0f, -focalLength);
-    
-    // Anchor for direction calculation
-    Vec3 viewportLowerLeftCorner(-viewportWidth / 2, -viewportHeight / 2, 0);
 
     // Object
     Sphere sphere(Vec3(0.0f, 0.0f, 2.0f), 0.5f);
@@ -77,13 +74,18 @@ int main() {
     // Iterating over every pixel
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            float widthPosPercent = float(x) / float(width); // Percent value of the progress on the width
-            float heightPosPercent = float(y) / float(height); // Percent value of the progress on the height
+            float viewportCord[2]  {
+                float(x) / float(width),
+                float(y) / float(height)
+            };
+            
+            // Adjust range from 0 -> 1 to -1 -> 1
+            viewportCord[0] = viewportCord[0] * 2.0f - 1.0f;
+            viewportCord[1] = -(viewportCord[1] * 2.0f - 1.0f); // Flip from -1 to 1 since ppm writes top-left to bottom-right
 
             // Calculate direction
             Vec3 direction { 
-                viewportLowerLeftCorner + Vec3(viewportWidth * widthPosPercent, 0, 0) + // viewport x axis
-                Vec3(0, viewportHeight * heightPosPercent, 0) - // viewport y axis
+                Vec3(viewportWidth * viewportCord[0], viewportHeight * viewportCord[1], 0) - // viewport Vec3(x axis, y axis, 0)
                 origin 
             };
 
