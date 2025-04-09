@@ -1,4 +1,4 @@
-#include "raytracer/geometry/vec3.h"
+#include "raytracer/geometry/vec.h"
 #include "raytracer/geometry/ray.h"
 #include "raytracer/geometry/shapes/sphere.h"
 #include "raytracer/lights/light.h"

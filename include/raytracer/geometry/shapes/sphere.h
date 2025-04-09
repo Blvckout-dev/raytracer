@@ -1,7 +1,7 @@
 #ifndef SPHERE_H
 #define SPHERE_H
 
-#include "raytracer/geometry/vec3.h"
+#include "raytracer/geometry/vec.h"
 #include "raytracer/geometry/ray.h"
 
 #include <cmath>
