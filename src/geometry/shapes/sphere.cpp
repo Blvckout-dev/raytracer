@@ -5,7 +5,7 @@
 /// @return The distance between the ray origin and the surface entry point
 float Sphere::hit(const Ray& ray) const {
     // Vector from sphere center to origin
-    Vec3 oc = ray.origin - center;
+    Vec3 oc { ray.origin - center };
 
     // Calculate the coefficients
     float a = ray.direction.dot(ray.direction);
