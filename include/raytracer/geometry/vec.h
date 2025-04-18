@@ -20,26 +20,29 @@ struct VecBase {
         data = {static_cast<T>(args)...};
     }
 
-    T& operator[](size_t i) { return static_cast<Derived*>(this)->data[i]; }
-    const T& operator[](size_t i) const { return static_cast<const Derived*>(this)->data[i]; }
+    Derived& self() { return static_cast<Derived&>(*this); }
+    const Derived& self() const { return static_cast<const Derived&>(*this); }
+
+    T& operator[](size_t i) { return data[i]; }
+    T operator[](size_t i) const { return data[i]; }
 
     // In-place addition
-    Derived& operator+=(const Derived& other) {
+    Derived& operator+=(const Derived& other) const {
         for (size_t i = 0; i < N; ++i)
             data[i] += other[i];
-        return *static_cast<Derived*>(this);
+        return self();
     }
 
     Derived& operator-=(const Derived& other) {
         for (size_t i = 0; i < N; ++i)
             data[i] -= other[i];
-        return *static_cast<Derived*>(this);
+        return self();
     }
 
     Derived& operator*=(T scalar) {
         for (size_t i = 0; i < N; ++i)
             data[i] *= scalar;
-        return *static_cast<Derived*>(this);
+        return self();
     }
 
     Derived operator+(const Derived& other) const {
@@ -50,20 +53,20 @@ struct VecBase {
     }
 
     Derived operator-() const {
-        Derived result = *static_cast<const Derived*>(this);
+        Derived result = self();
         for (size_t i = 0; i < N; ++i)
             result[i] = -data[i];
         return result;
     }
 
     Derived operator-(const Derived& other) const {
-        Derived result = *static_cast<const Derived*>(this);
+        Derived result = self();
         result -= other;
         return result;
     }
 
     Derived operator*(T scalar) const {
-        Derived result = *static_cast<const Derived*>(this);
+        Derived result = self();
         result *= scalar;
         return result;
     }
@@ -76,18 +79,18 @@ struct VecBase {
     }
 
     T length() const {
-        return std::sqrt(dot(*static_cast<const Derived*>(this)));
+        return std::sqrt(dot(self()));
     }
 
     Derived& normalize() {
         T len = length();
         if (len > 0.0f)
             *this *= (1.0f / len);
-        return *static_cast<Derived*>(this);
+        return self();
     }
 
     Derived normalized() const {
-        Derived result = *static_cast<const Derived*>(this);
+        Derived result = self();
         return result.normalize();
     }
 };
@@ -108,11 +111,13 @@ struct Vec<T, 3> : public VecBase<Vec<T, 3>, T, 3> {
 
     // Constructors
     using VecBase<Vec, T, 3>::VecBase;
+    
     Vec(T x_, T y_, T z_) {
         this->data[0] = x_;
         this->data[1] = y_;
         this->data[2] = z_;
     }
+    
     Vec(const Vec<T, 3>& vec) {
         this->data[0] = vec.x;
         this->data[1] = vec.y;
