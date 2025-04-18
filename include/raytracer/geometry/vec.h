@@ -7,6 +7,8 @@
 // Generic N-dimensional Vec
 template <typename Derived, typename T, size_t N>
 struct VecBase {
+    static_assert(std::is_arithmetic_v<T>, "T must be a numeric type");
+
     std::array<T, N> data{};
     
     // Constructor
