@@ -63,7 +63,7 @@ int main() {
     out << "255\n";
 
     // Set ray origin
-    Vec3 origin(0.0f, 0.0f, -focalLength);
+    Vec3 origin(0.0f, 0.0f, 0.0f);
 
     // Object
     Sphere sphere(Vec3(0.0f, 0.0f, 2.0f), 0.5f);
@@ -85,7 +85,7 @@ int main() {
 
             // Calculate direction
             Vec3 direction { 
-                Vec3(viewportWidth * viewportCord[0], viewportHeight * viewportCord[1], 0) - // viewport Vec3(x axis, y axis, 0)
+                Vec3(viewportWidth * viewportCord[0], viewportHeight * viewportCord[1], focalLength) - // viewport Vec3(x axis, y axis, 0)
                 origin 
             };
 
