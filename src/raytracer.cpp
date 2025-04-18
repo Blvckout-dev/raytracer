@@ -6,9 +6,6 @@
 #include <fstream>
 #include <cmath>
 
-// Mathematical constants
-#define M_PI 3.14159265358979323846 // pi
-
 Vec3 color(const Ray& ray, const Sphere& sphere, const Light& light) {
     // Base color of the sphere
     Vec3 baseColor(1.0f, 0.0f, 0.0f);
