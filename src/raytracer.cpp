@@ -17,13 +17,13 @@ Vec3 color(const Ray& ray, const Sphere& sphere, const Light& light) {
     }
 
     // Intersection location
-    Vec3 intersection = ray.origin + ray.direction * t;
+    Vec3 intersection = ray.Origin + ray.Direction * t;
 
     // Normalized direction vector from sphere.center to intersection location
     Vec3 normal = (intersection - sphere.center).normalized();
 
     // Angle between the light direction and the surface normal
-    float intensity = std::max(normal.dot(-light.direction), 0.0f) * light.intensity;
+    float intensity = std::max(normal.dot(-light.Direction), 0.0f) * light.Intensity;
 
     // Apply lighting effect (combine light color with intensity)
     return baseColor * intensity;

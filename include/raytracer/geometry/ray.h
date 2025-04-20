@@ -3,15 +3,14 @@
 
 #include "vec.h"
 
-class Ray {
-public:
-    Vec3 origin;
-    Vec3 direction;
+struct Ray {
+    Vec3 Origin;
+    Vec3 Direction;
 
-    Ray(const Vec3& origin, const Vec3& direction) : origin(origin), direction(direction) {}
+    Ray(const Vec3& origin, const Vec3& direction) : Origin(origin), Direction(direction) {}
 
-    Vec3 at(float t) const {
-        return origin + direction * t;
+    Vec3 At(float t) const {
+        return Origin + Direction * t;
     }
 };
 
