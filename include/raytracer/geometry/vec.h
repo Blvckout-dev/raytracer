@@ -104,7 +104,36 @@ struct Vec : public VecBase<Vec<T, N>, T, N> {
     using VecBase<Vec<T, N>, T, N>::VecBase;
 };
 
-// Specialization 
+// Specialization
+// Vec2
+template<typename T>
+struct Vec<T, 2> : public VecBase<Vec<T, 2>, T, 2> {
+    T& x = this->data[0];
+    T& y = this->data[1];
+
+    // Constructors
+    using VecBase<Vec, T, 2>::VecBase;
+    
+    Vec(T x_, T y_) {
+        this->data[0] = x_;
+        this->data[1] = y_;
+    }
+    
+    Vec(const Vec<T, 2>& vec) {
+        this->data[0] = vec.x;
+        this->data[1] = vec.y;
+    }
+
+    Vec& operator=(const Vec& other) {
+        if (this != &other) { // Prevent self-assignment
+            this->data[0] = other.data[0];
+            this->data[1] = other.data[1];
+        }
+        return *this;
+    }
+};
+
+// Vec3
 template<typename T>
 struct Vec<T, 3> : public VecBase<Vec<T, 3>, T, 3> {
     T& x = this->data[0];
