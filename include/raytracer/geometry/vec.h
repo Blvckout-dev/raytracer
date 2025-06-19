@@ -202,6 +202,27 @@ struct Vec<T, 3> : detail::VecBase<T, 3, Vec<T, 3>> {
     }
 };
 
+// Vec4
+template<typename T>
+struct Vec<T, 4> : detail::VecBase<T, 4, Vec<T, 4>> {
+    union {
+        struct { T x, y, z, w; };
+        T data[4];
+    };
+
+    using detail::VecBase<T, 4, Vec<T, 4>>::VecBase;
+
+    constexpr Vec() noexcept : x(0), y(0), z(0), w(0) {}
+    constexpr Vec(T _x, T _y, T _z, T _w) noexcept : x(_x), y(_y), z(_z), w(_w) {}
+
+    constexpr Vec(Vec<T, 3> vec, T _w) noexcept : x(vec.x), y(vec.y), z(vec.z), w(_w) {}
+    constexpr Vec(Vec<T, 2> vec, T _z, T _w) noexcept : x(vec.x), y(vec.y), z(_z), w(_w) {}
+
+    template <size_t M>
+    requires (M >= 4)
+    constexpr explicit Vec(const Vec<T, M>& vec) noexcept : x(vec[0]), y(vec[1]), z(vec[2]), w(vec[3]) {}
+};
+
 // Aliases
 using Vec2 = Vec<float, 2>;
 using Vec3 = Vec<float, 3>;
