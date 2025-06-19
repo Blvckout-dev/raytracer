@@ -6,6 +6,8 @@
 #include <fstream>
 #include <cmath>
 
+using vec::Vec3;
+
 Vec3 color(const Ray& ray, const Sphere& sphere, const Light& light) {
     // Base color of the sphere
     Vec3 baseColor(1.0f, 0.0f, 0.0f);

@@ -8,6 +8,8 @@
 #include <iostream>
 #include <iomanip>
 
+using vec::Vec;
+
 template<typename T, size_t R, size_t C>
 struct Mat {
     static_assert(std::is_arithmetic_v<T>, "T must be a numeric type");

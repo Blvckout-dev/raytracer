@@ -3,6 +3,8 @@
 
 #include "vec.h"
 
+using vec::Vec3;
+
 struct Ray {
     Vec3 Origin;
     Vec3 Direction;
