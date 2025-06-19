@@ -2,6 +2,7 @@
 #define VEC_H
 
 #include <cmath>
+#include "raytracer/log/log.h"
 
 namespace vec {
 
@@ -21,6 +22,7 @@ struct VecBase {
     constexpr VecBase() noexcept = default;
     // Fill constructor
     constexpr explicit VecBase(T value) noexcept {
+        LOG_PERFORMANCE("VecBase(): Fill constructor");
         for (size_t i = 0; i < N; ++i)
             (*this)[i] = value;
     }
@@ -28,6 +30,7 @@ struct VecBase {
     template <size_t M, typename... Args>
     requires (N == M + sizeof...(Args)) && (std::is_convertible_v<Args, T> && ...)
     constexpr VecBase(const vec::Vec<T, M>& vec, const Args&... args) noexcept {
+        LOG_PERFORMANCE("VecBase(): Composed constructor from Vec<T, M> and additional args");
         T temp[] = { static_cast<T>(args)... };
 
         // Copy M elements from the input vector
@@ -42,6 +45,7 @@ struct VecBase {
     // Convert constructor
     template <size_t M>
     constexpr explicit VecBase(const vec::Vec<T, M>& vec) noexcept {
+        LOG_PERFORMANCE("VecBase(): Convert constructor from Vec<T, M>");
         for (size_t i = 0; i < N; ++i)
             (*this)[i] = (i < M) ? vec[i] : T{};
     }
@@ -230,4 +234,4 @@ using Vec4 = Vec<float, 4>;
 
 } // namespace vec
 
-#endif
+#endif // VEC_H
