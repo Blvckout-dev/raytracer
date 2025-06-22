@@ -1,8 +1,8 @@
 #ifndef VEC_H
 #define VEC_H
 
-#include <cmath>
 #include "raytracer/log/log.h"
+#include <cmath>
 
 namespace vec {
 
@@ -76,6 +76,12 @@ struct VecBase {
         return static_cast<Derived&>(*this);
     }
 
+    constexpr Derived& operator/=(T scalar) noexcept {
+        for (size_t i = 0; i < N; ++i)
+            (*this)[i] /= scalar;
+        return static_cast<Derived&>(*this);
+    }
+
     constexpr Derived operator+(const Derived& other) const noexcept {
         Derived result = static_cast<const Derived&>(*this);
         result += other;
@@ -98,6 +104,12 @@ struct VecBase {
     constexpr Derived operator*(T scalar) const noexcept {
         Derived result = static_cast<const Derived&>(*this);
         result *= scalar;
+        return result;
+    }
+
+    constexpr Derived operator/(T scalar) const noexcept {
+        Derived result = static_cast<const Derived&>(*this);
+        result /= scalar;
         return result;
     }
 
