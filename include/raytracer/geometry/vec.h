@@ -153,6 +153,11 @@ struct VecBase {
         Derived result = static_cast<const Derived&>(*this);
         return result.normalize();
     }
+
+    void print() const {
+        for (size_t i = 0; i < N; i++)
+            std::cout << "[" << i << "] " << (*this)[i] << std::endl;
+    }
 };
 
 } // namespace detail
