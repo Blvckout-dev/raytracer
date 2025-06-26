@@ -14,7 +14,7 @@ template<typename T, size_t R, size_t C>
 struct Mat {
     static_assert(std::is_arithmetic_v<T>, "T must be a numeric type");
 
-    std::array<Vec<T, R>, C> data{};
+    Vec<T, R> data[C] {};
 
     Mat() = default;
 
@@ -35,7 +35,7 @@ struct Mat {
 
     /// @brief Mirrors the matrix along its main diagonal
     /// @return A new matrix of dimensions (C x R)
-    Mat transpose() const {
+    Mat transposed() const {
         Mat result{};
         for (size_t i = 0; i < C; ++i)
             for (size_t j = 0; j < R; ++j)
