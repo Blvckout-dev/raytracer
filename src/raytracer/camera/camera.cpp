@@ -5,13 +5,14 @@ Camera::Camera(
     Vec3 forwardDirection,
     uint32_t width,
     uint32_t height,
-    float fovDegrees
+    float fovDegrees,
+    FovType fovType
 ) :
     _position(position),
     _forwardDirection(forwardDirection.normalized()) 
 {
     SetResolution(width, height);
-    SetFov(fovDegrees);
+    SetFov(fovDegrees, fovType);
 }
 
 void Camera::UpdateViewMatrix()
@@ -26,9 +27,17 @@ void Camera::UpdateProjectionMatrix()
 	_inverseProjectionMat = _projectionMat.inversed();
 }
 
-void Camera::SetFov(float fovDegrees) {
+void Camera::SetFov(float fovDegrees, FovType fovType) {
     _fovDegrees = std::clamp(fovDegrees, 1.0f, 179.0f);
-    _verticalFovRadians = _fovDegrees * (M_PI / 180.0f);
+    _fovType = fovType;
+
+    if (_fovType == FovType::Horizontal) {
+        float fovRad = fovDegrees * (M_PI / 180.0f);
+        _verticalFovRadians = 2.0f * atanf(tanf(fovRad / 2.0f) / _aspectRatio);
+    } else {
+        _verticalFovRadians = fovDegrees * (M_PI / 180.0f);
+    }
+
     _focalLength = _viewportHeight / (2.0f * tan(_verticalFovRadians / 2.0f));
 
     UpdateProjectionMatrix();

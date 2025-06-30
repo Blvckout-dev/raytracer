@@ -9,11 +9,16 @@
 using vec::Vec3;
 using vec::Vec4;
 
+enum class FovType {
+    Vertical,
+    Horizontal
+};
+
 class Camera {
 private:
     Vec3 _position {};
     Vec3 _forwardDirection {};
-    const Vec3 _worldUp {0.f, 1.f, 0.f};
+    const Vec3 _worldUp { 0.f, 1.f, 0.f };
         
     uint32_t _imageWidth {};
     uint32_t _imageHeight {};
@@ -22,6 +27,7 @@ private:
     float _viewportWidth {};
 
     float _fovDegrees {};
+    FovType _fovType { FovType::Vertical };
     float _verticalFovRadians {};
 
     float _zNear { 0.1f };
@@ -44,10 +50,11 @@ public:
         Vec3 forwardDirection = Vec3(0.f, 0.f, -1.f),
         uint32_t width = 800,
         uint32_t height = 600,
-        float fovDegrees = 90.0f
+        float fovDegrees = 90.0f,
+        FovType fovType = FovType::Vertical
     );
 
-    void SetFov(float fovDegrees);
+    void SetFov(float fovDegrees, FovType fovType);
     float GetFov() const { return _fovDegrees; };
 
     void SetResolution(uint32_t width, uint32_t height);
