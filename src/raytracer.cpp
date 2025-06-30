@@ -2,6 +2,7 @@
 #include "raytracer/geometry/ray.h"
 #include "raytracer/geometry/shapes/sphere.h"
 #include "raytracer/lights/light.h"
+#include "raytracer/camera/camera.h"
 #include <iostream>
 #include <fstream>
 #include <cmath>
@@ -33,21 +34,20 @@ Vec3 color(const Ray& ray, const Sphere& sphere, const Light& light) {
 
 int main() {
     // Resolution
-    constexpr int width { 480 };
-    constexpr int height { 270 };
-    // Aspect raio
-    constexpr float aspectRatio { static_cast<float>(width) / static_cast<float>(height) };
-    
-    // Field of View
-    constexpr float fovDegress { 90.0f }; // Default: 90 | Limit fov between 1 and 179 when accepting user input
-    constexpr float fovRadians { fovDegress * static_cast<float>(M_PI) / 180.0f };
-    
-    // Set viewport size
-    constexpr float viewportHeight { 2.0f };
-    constexpr float viewportWidth { viewportHeight * aspectRatio };
+    constexpr int width { 800 };
+    constexpr int height { 600 };
 
-    // Calculate focal length
-    float focalLength { viewportHeight / (2.0f * tan(fovRadians / 2.0f)) };
+    // Field of View
+    constexpr float fovDegrees { 90.0f };
+
+    // Camera setup
+    Camera camera = Camera(
+        Vec3(0.f, 0.f, 6.f),
+        Vec3(0.0f, 0.0f, -1.0f),
+        width,
+        height,
+        fovDegrees
+    );
     
     // Output file
     std::ofstream out("output.ppm", std::ios::out);
@@ -61,35 +61,17 @@ int main() {
     out << width << " " << height << "\n";
     out << "255\n";
 
-    // Set ray origin
-    Vec3 origin(0.0f, 0.0f, 0.0f);
-
     // Object
-    Sphere sphere(Vec3(0.0f, 0.0f, 2.0f), 0.5f);
+    Sphere sphere(Vec3(0.f, 0.f, 0.f), 0.5f);
 
     // Light
     Light light(Vec3(1.0f, -1.0f, 0.0f));
 
     // Iterating over every pixel
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            float viewportCord[2]  {
-                float(x) / float(width),
-                float(y) / float(height)
-            };
-            
-            // Adjust range from 0 -> 1 to -1 -> 1
-            viewportCord[0] = viewportCord[0] * 2.0f - 1.0f;
-            viewportCord[1] = -(viewportCord[1] * 2.0f - 1.0f); // Flip from -1 to 1 since ppm writes top-left to bottom-right
-
-            // Calculate direction
-            Vec3 direction { 
-                Vec3(viewportWidth * viewportCord[0], viewportHeight * viewportCord[1], focalLength) - // viewport Vec3(x axis, y axis, 0)
-                origin 
-            };
-
+    for (uint32_t y = 0; y < height; y++) {
+        for (uint32_t x = 0; x < width; x++) {
             // Collision check/color calculation
-            Ray ray(origin, direction);
+            Ray ray = camera.GetRay(x, y);
             Vec3 col = color(ray, sphere, light);
 
             // Convert color intensity from percent to 8-bit color depth
