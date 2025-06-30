@@ -18,14 +18,10 @@ struct Mat {
 
     Mat() = default;
 
-    // Static constructor for identity matrix
-    static Mat identity() {
-        static_assert(C == R, "Identity requires a square matrix");
-        Mat m{}; // default initialization
-        for (size_t i = 0; i < C; ++i) {
-            m[i][i] = T(1);
-        }
-        return m;
+    explicit Mat(T diagonalValue) {
+        static_assert(C == R, "Diagonal constructor requires square matrix");
+        for (size_t i = 0; i < C; ++i)
+            (*this)[i][i] = diagonalValue;
     }
 
     Vec<T, R>& operator[](size_t col) { return data[col]; }
