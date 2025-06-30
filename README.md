@@ -20,7 +20,7 @@ This application represents my journey of learning and refining a raytracer, bal
 
 ## Tech Stack
 
-- **Programming Language:** C++
+- **Programming Language:** C++20
 - **Build System:** CMake
 
 ## Installation
