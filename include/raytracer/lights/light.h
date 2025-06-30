@@ -3,6 +3,8 @@
 
 #include "raytracer/geometry/vec.h"
 
+using vec::Vec3;
+
 struct Light {
     Vec3 Direction;
     Vec3 Color;
