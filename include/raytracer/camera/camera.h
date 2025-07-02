@@ -5,6 +5,7 @@
 #include "raytracer/geometry/mat.h"
 #include "raytracer/geometry/transform.h"
 #include "raytracer/geometry/ray.h"
+#include <algorithm>
 
 using vec::Vec3;
 using vec::Vec4;
