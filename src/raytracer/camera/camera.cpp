@@ -32,10 +32,10 @@ void Camera::SetFov(float fovDegrees, FovType fovType) {
     _fovType = fovType;
 
     if (_fovType == FovType::Horizontal) {
-        float fovRad = fovDegrees * (M_PI / 180.0f);
+        float fovRad = fovDegrees * (static_cast<float>(M_PI)  / 180.0f);
         _verticalFovRadians = 2.0f * atanf(tanf(fovRad / 2.0f) / _aspectRatio);
     } else {
-        _verticalFovRadians = fovDegrees * (M_PI / 180.0f);
+        _verticalFovRadians = fovDegrees * (static_cast<float>(M_PI)  / 180.0f);
     }
 
     _focalLength = _viewportHeight / (2.0f * tan(_verticalFovRadians / 2.0f));
