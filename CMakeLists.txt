@@ -16,17 +16,20 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 # Create executable
 add_executable(raytracer)
 
-# Add subdirectories
+# Add main application sources (in src/raytracer)
 add_subdirectory(src/raytracer)
 
 # Include headers
 target_include_directories(raytracer
-    PUBLIC
-        ${PROJECT_SOURCE_DIR}/include
+    PRIVATE
+        ${PROJECT_INCLUDE_DIR}
 )
 
 # Compile definitions (e.g., M_PI)
 target_compile_definitions(raytracer PRIVATE _USE_MATH_DEFINES)
+
+# Link qt widget  
+target_link_libraries(raytracer PRIVATE Qt6::Widgets)
 
 # Output directory for each configuration
 set_target_properties(raytracer PROPERTIES
