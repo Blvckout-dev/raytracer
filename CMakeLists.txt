@@ -5,16 +5,28 @@ project(Raytracer)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Add include folder
-include_directories(include)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 
-# Add source files
-file(GLOB_RECURSE SOURCES "src/*.cpp" "src/**/*.cpp")
+set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include/raytracer)
+
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
 # Create executable
-add_executable(raytracer ${SOURCES})
+add_executable(raytracer)
 
-add_compile_definitions(_USE_MATH_DEFINES)
+# Add subdirectories
+add_subdirectory(src/raytracer)
+
+# Include headers
+target_include_directories(raytracer
+    PUBLIC
+        ${PROJECT_SOURCE_DIR}/include
+)
+
+# Compile definitions (e.g., M_PI)
+target_compile_definitions(raytracer PRIVATE _USE_MATH_DEFINES)
 
 # Output directory for each configuration
 set_target_properties(raytracer PROPERTIES
