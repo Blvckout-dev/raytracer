@@ -1,10 +1,10 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "raytracer/geometry/vec.h"
-#include "raytracer/geometry/mat.h"
-#include "raytracer/geometry/transform.h"
-#include "raytracer/geometry/ray.h"
+#include "geometry/vec.h"
+#include "geometry/mat.h"
+#include "geometry/transform.h"
+#include "geometry/ray.h"
 #include <algorithm>
 
 using vec::Vec3;

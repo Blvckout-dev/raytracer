@@ -1,7 +1,7 @@
 #ifndef VEC_H
 #define VEC_H
 
-#include "raytracer/log/log.h"
+#include "log/log.h"
 #include <cmath>
 
 namespace vec {

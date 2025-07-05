@@ -1,4 +1,4 @@
-#include "raytracer/camera/camera.h"
+#include "camera/camera.h"
 
 Camera::Camera(
     Vec3 position,

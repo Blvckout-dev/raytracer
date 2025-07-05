@@ -9,15 +9,15 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include/raytracer)
+set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
 # Create executable
 add_executable(raytracer)
 
-# Add main application sources (in src/raytracer)
-add_subdirectory(src/raytracer)
+# Add main application sources
+add_subdirectory(src)
 
 # Include headers
 target_include_directories(raytracer

@@ -1,7 +1,7 @@
 #ifndef LIGHT_H
 #define LIGHT_H
 
-#include "raytracer/geometry/vec.h"
+#include "geometry/vec.h"
 
 using vec::Vec3;
 

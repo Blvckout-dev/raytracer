@@ -1,8 +1,8 @@
-#include "raytracer/geometry/vec.h"
-#include "raytracer/geometry/ray.h"
-#include "raytracer/geometry/shapes/sphere.h"
-#include "raytracer/lights/light.h"
-#include "raytracer/camera/camera.h"
+#include "geometry/vec.h"
+#include "geometry/ray.h"
+#include "geometry/shapes/sphere.h"
+#include "lights/light.h"
+#include "camera/camera.h"
 #include <iostream>
 #include <fstream>
 #include <cmath>

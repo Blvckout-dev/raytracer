@@ -1,4 +1,4 @@
-#include "raytracer/geometry/shapes/sphere.h"
+#include "geometry/shapes/sphere.h"
 
 /// @brief Checks if a ray hits the surface
 /// @param ray 
