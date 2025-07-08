@@ -3,9 +3,11 @@
 #include "geometry/shapes/sphere.h"
 #include "lights/light.h"
 #include "camera/camera.h"
+#include "ui/MainWindow.h"
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include <QApplication>
 
 using vec::Vec3;
 
@@ -32,7 +34,7 @@ Vec3 color(const Ray& ray, const Sphere& sphere, const Light& light) {
     return baseColor * intensity;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
     // Resolution
     constexpr int width { 800 };
     constexpr int height { 600 };
@@ -86,5 +88,8 @@ int main() {
 
     out.close();
 
-    return 0;
+    QApplication app(argc, argv);
+    MainWindow w;
+    w.show();
+    return app.exec();
 }
