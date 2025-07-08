@@ -28,6 +28,14 @@ target_include_directories(raytracer
 # Compile definitions (e.g., M_PI)
 target_compile_definitions(raytracer PRIVATE _USE_MATH_DEFINES)
 
+# Recursively grab headers for IDE visibility
+file(GLOB_RECURSE PROJECT_HEADERS
+    CONFIGURE_DEPENDS
+    ${PROJECT_INCLUDE_DIR}/*.h
+)
+
+target_sources(raytracer PRIVATE ${PROJECT_HEADERS})
+
 # Link qt widget  
 target_link_libraries(raytracer PRIVATE Qt6::Widgets)
 
