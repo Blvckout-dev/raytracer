@@ -5,7 +5,6 @@
 #include "geometry/mat.h"
 #include "geometry/transform.h"
 #include "geometry/ray.h"
-#include <algorithm>
 
 using vec::Vec3;
 using vec::Vec4;

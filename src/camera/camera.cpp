@@ -1,4 +1,5 @@
 #include "camera/camera.h"
+#include <algorithm>
 
 Camera::Camera(
     Vec3 position,
