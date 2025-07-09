@@ -8,6 +8,8 @@
 #include <fstream>
 #include <cmath>
 #include <QApplication>
+#include <QImage>
+#include <QLabel>
 
 using vec::Vec3;
 
@@ -35,6 +37,8 @@ Vec3 color(const Ray& ray, const Sphere& sphere, const Light& light) {
 }
 
 int main(int argc, char *argv[]) {
+    QApplication app(argc, argv);
+
     // Resolution
     constexpr int width { 800 };
     constexpr int height { 600 };
@@ -50,24 +54,14 @@ int main(int argc, char *argv[]) {
         height,
         fovDegrees
     );
-    
-    // Output file
-    std::ofstream out("output.ppm", std::ios::out);
-    if (!out) {
-        std::cerr << "Error opening file!" << std::endl;
-        return 1;
-    }
-
-    // PPM Header
-    out << "P3\n";
-    out << width << " " << height << "\n";
-    out << "255\n";
 
     // Object
     Sphere sphere(Vec3(0.f, 0.f, 0.f), 0.5f);
 
     // Light
     Light light(Vec3(1.0f, -1.0f, 0.0f));
+
+    QImage image(width, height, QImage::Format_RGB888);
 
     // Iterating over every pixel
     for (uint32_t y = 0; y < height; y++) {
@@ -77,19 +71,19 @@ int main(int argc, char *argv[]) {
             Vec3 col = color(ray, sphere, light);
 
             // Convert color intensity from percent to 8-bit color depth
-            int ir = static_cast<int>(255.99f * col.x);
-            int ig = static_cast<int>(255.99f * col.y);
-            int ib = static_cast<int>(255.99f * col.z);
+            int r = static_cast<int>(255.99f * col.x);
+            int g = static_cast<int>(255.99f * col.y);
+            int b = static_cast<int>(255.99f * col.z);
 
-            // Write color channels to output
-            out << ir << " " << ig << " " << ib << "\n";
+            // Set pixel color (x, y)
+            image.setPixelColor(x, y, QColor(r, g, b));
         }
     }
 
-    out.close();
-
-    QApplication app(argc, argv);
     MainWindow w;
     w.show();
+
+    w.SetImage(image);
+
     return app.exec();
 }

@@ -12,3 +12,8 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::SetImage(const QImage &image)
+{
+    ui->imageLabel->setPixmap(QPixmap::fromImage(image));
+}
