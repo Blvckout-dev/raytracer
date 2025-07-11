@@ -84,6 +84,7 @@ int main(int argc, char *argv[]) {
     w.show();
 
     w.SetImage(image);
+    w.showMenu();
 
     return app.exec();
 }
