@@ -46,4 +46,5 @@ target_link_libraries(raytracer PRIVATE Qt6::Widgets)
 set_target_properties(raytracer PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY_DEBUG "${PROJECT_SOURCE_DIR}/bin/Debug"
     RUNTIME_OUTPUT_DIRECTORY_RELEASE "${PROJECT_SOURCE_DIR}/bin/Release"
+    WIN32_EXECUTABLE ON
 )
