@@ -15,5 +15,5 @@ MainWindow::~MainWindow()
 
 void MainWindow::SetImage(const QImage &image)
 {
-    ui->imageLabel->setPixmap(QPixmap::fromImage(image));
+    // ui->imageLabel->setPixmap(QPixmap::fromImage(image));
 }
