@@ -1,9 +1,9 @@
 set(UI_FILES
-    ${CMAKE_SOURCE_DIR}/ui/menu/Menu.ui
+    ${CMAKE_SOURCE_DIR}/ui/menu/MenuWidget.ui
 )
 
 target_sources(raytracer PRIVATE
-    Menu.cpp
-    Menu.h
+    MenuWidget.cpp
+    MenuWidget.h
     ${UI_FILES}
 )
