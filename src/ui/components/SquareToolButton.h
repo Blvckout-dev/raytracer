@@ -53,7 +53,7 @@ public:
     }
 
     QSize sizeHint() const override {
-        return QSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
+        return QSize(prefSize, prefSize);
     }
 };
 
