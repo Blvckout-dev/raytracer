@@ -2,7 +2,7 @@
 #include <QWidget>
 
 SquareLayout::SquareLayout(QWidget* parent) : QLayout(parent) {
-    
+
 }
 
 SquareLayout::~SquareLayout() {
@@ -32,6 +32,7 @@ QSize SquareLayout::minimumSize() const {
 void SquareLayout::setGeometry(const QRect& rect) {
     QLayout::setGeometry(rect);
 
+    Qt::LayoutDirection direction = parentWidget()->layoutDirection();
     int n = items.size();
 
     if (n == 0)
@@ -40,11 +41,15 @@ void SquareLayout::setGeometry(const QRect& rect) {
     int spacing = this->spacing();
     int size = qMin(rect.width() / n - spacing, rect.height());
 
-    int x = rect.x();
+    int x = direction == Qt::LeftToRight ? rect.x() : rect.width() - size;
     int y = rect.y() + (rect.height() - size) / 2;
 
     for (int i = 0; i < n; ++i) {
         items[i]->setGeometry(QRect(x, y, size, size));
-        x += size + spacing;
+        
+        if (direction == Qt::LeftToRight)
+            x += size + spacing;
+        else
+            x -= size + spacing;
     }
 }
