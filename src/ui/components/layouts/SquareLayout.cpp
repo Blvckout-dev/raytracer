@@ -1,0 +1,50 @@
+#include "SquareLayout.h"
+#include <QWidget>
+
+SquareLayout::SquareLayout(QWidget* parent) : QLayout(parent) {
+    
+}
+
+SquareLayout::~SquareLayout() {
+    QLayoutItem* item;
+    while ((item = takeAt(0)))
+        delete item;
+}
+
+void SquareLayout::addItem(QLayoutItem* item) {
+    items.append(item);
+}
+
+QSize SquareLayout::sizeHint() const {
+    QSize size;
+    for (QLayoutItem* item : items)
+        size += item->sizeHint();
+    return size;
+}
+
+QSize SquareLayout::minimumSize() const {
+    QSize size;
+    for (QLayoutItem* item : items)
+        size = size.expandedTo(item->minimumSize());
+    return size;
+}
+
+void SquareLayout::setGeometry(const QRect& rect) {
+    QLayout::setGeometry(rect);
+
+    int n = items.size();
+
+    if (n == 0)
+        return;
+
+    int spacing = this->spacing();
+    int size = qMin(rect.width() / n - spacing, rect.height());
+
+    int x = rect.x();
+    int y = rect.y() + (rect.height() - size) / 2;
+
+    for (int i = 0; i < n; ++i) {
+        items[i]->setGeometry(QRect(x, y, size, size));
+        x += size + spacing;
+    }
+}

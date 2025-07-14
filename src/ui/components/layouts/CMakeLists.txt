@@ -4,5 +4,6 @@ target_include_directories(raytracer
 )
 
 target_sources(raytracer PRIVATE
+    SquareLayout.cpp
     SquareLayout.h
 )
