@@ -1,1 +1,2 @@
 add_subdirectory(layouts)
+add_subdirectory(widgets)
