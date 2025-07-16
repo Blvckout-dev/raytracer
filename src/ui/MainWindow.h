@@ -17,6 +17,7 @@ private:
     Ui::MainWindow *ui;
 
     ViewportWidget* _viewportWidget;
+    MenuWidget* _menuWidget;
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
