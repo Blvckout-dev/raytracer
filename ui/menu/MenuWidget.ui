@@ -16,9 +16,6 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
-  <property name="styleSheet">
-   <string>background-color: #00ccff;</string>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout" stretch="1,10">
    <property name="spacing">
     <number>0</number>
@@ -89,7 +86,7 @@
    <item>
     <widget class="QFrame" name="menuDetailFrame">
      <property name="styleSheet">
-      <string>background-color:rgb(17, 255, 0);</string>
+      <string notr="true">background-color:rgba(0, 0, 0, 0);</string>
      </property>
      <layout class="QFormLayout" name="formLayout"/>
     </widget>
