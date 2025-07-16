@@ -3,11 +3,11 @@
 
 ViewportWidget::ViewportWidget(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ViewportWidget)
+    _ui(new Ui::ViewportWidget)
 {
-    ui->setupUi(this);
+    _ui->setupUi(this);
 
-    _renderImage = ui->imageLabel;
+    _renderImage = _ui->imageLabel;
 }
 
 QLabel* ViewportWidget::getRenderImage() const

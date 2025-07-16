@@ -11,7 +11,7 @@ namespace Ui {
 class ViewportWidget : public QWidget {
     Q_OBJECT
 private:
-    Ui::ViewportWidget *ui;
+    Ui::ViewportWidget* _ui;
 
     QLabel* _renderImage;
 public:

@@ -14,7 +14,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindow* _ui;
 
     ViewportWidget* _viewportWidget;
     MenuWidget* _menuWidget;
