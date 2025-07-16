@@ -2,17 +2,19 @@
 #define MENU_H
 
 #include <QFrame>
-#include "ui_MenuWidget.h"
+
+namespace Ui {
+    class MenuWidget;
+}
 
 class MenuWidget : public QFrame {
     Q_OBJECT
+private:
+    Ui::MenuWidget* _ui;
 
 public:
     explicit MenuWidget(QWidget* parent = nullptr);
     ~MenuWidget();
-
-private:
-    Ui::Frame ui;
 };
 
 #endif

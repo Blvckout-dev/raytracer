@@ -1,9 +1,16 @@
 #include "MenuWidget.h"
+#include "ui_MenuWidget.h"
 
-MenuWidget::MenuWidget(QWidget* parent)
-  : QFrame(parent)
+MenuWidget::MenuWidget(QWidget *parent) :
+    QFrame(parent),
+    _ui(new Ui::MenuWidget)
 {
-    ui.setupUi(this);
+    _ui->setupUi(this);
+
+    connect(_ui->exitButton, &QToolButton::clicked, qApp, &QCoreApplication::quit);
 }
 
-MenuWidget::~MenuWidget() = default;
+MenuWidget::~MenuWidget()
+{
+    delete _ui;
+}
