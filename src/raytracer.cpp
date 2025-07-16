@@ -84,7 +84,6 @@ int main(int argc, char *argv[]) {
     w.show();
 
     w.setImage(image);
-    w.toggleMenu();
 
     return app.exec();
 }
