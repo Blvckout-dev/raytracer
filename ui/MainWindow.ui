@@ -13,11 +13,14 @@
   <property name="windowTitle">
    <string>Raytracer</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #333333</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
-  <layout class="QVBoxLayout" name="verticalLayout">
-    <property name="margin">
-        <number>0</number>
-        </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="margin" stdset="0">
+     <number>0</number>
+    </property>
     <item>
      <layout class="QGridLayout" name="gridLayout"/>
     </item>
