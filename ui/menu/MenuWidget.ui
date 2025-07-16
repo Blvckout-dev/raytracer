@@ -59,7 +59,7 @@
         <property name="layoutDirection">
          <enum>Qt::LayoutDirection::RightToLeft</enum>
         </property>
-        <widget class="QToolButton" name="toolButton">
+        <widget class="QToolButton" name="exitButton">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -75,10 +75,14 @@
           </sizepolicy>
          </property>
          <property name="styleSheet">
-          <string>background-color: #aa2222;</string>
+          <string notr="true">QToolButton {
+    border-radius: 3px;
+    background-color: #ff0000;
+    color: #ffffff;
+}</string>
          </property>
          <property name="text">
-          <string>...</string>
+          <string>X</string>
          </property>
         </widget>
        </widget>
