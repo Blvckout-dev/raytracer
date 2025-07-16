@@ -7,8 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    _viewport = new Viewport(this);
-    ui->gridLayout->addWidget(_viewport, 0, 0);
+    _viewportWidget = new ViewportWidget(this);
+    ui->gridLayout->addWidget(_viewportWidget, 0, 0);
 }
 
 MainWindow::~MainWindow()
@@ -18,7 +18,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::setImage(const QImage &image)
 {
-    _viewport->getRenderImage()->setPixmap(QPixmap::fromImage(image));
+    _viewportWidget->getRenderImage()->setPixmap(QPixmap::fromImage(image));
 }
 
 void MainWindow::showMenu()

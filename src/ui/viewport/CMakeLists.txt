@@ -1,9 +1,9 @@
 set(UI_FILES
-    ${CMAKE_SOURCE_DIR}/ui/viewport/Viewport.ui
+    ${CMAKE_SOURCE_DIR}/ui/viewport/ViewportWidget.ui
 )
 
 target_sources(raytracer PRIVATE
-    Viewport.cpp
-    Viewport.h
+    ViewportWidget.cpp
+    ViewportWidget.h
     ${UI_FILES}
 )

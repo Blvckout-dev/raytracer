@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "viewport/Viewport.h"
+#include "viewport/ViewportWidget.h"
 #include "menu/MenuWidget.h"
 #include <QMainWindow>
 
@@ -16,7 +16,7 @@ class MainWindow : public QMainWindow
 private:
     Ui::MainWindow *ui;
 
-    Viewport* _viewport;
+    ViewportWidget* _viewportWidget;
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
