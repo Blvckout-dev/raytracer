@@ -1,12 +1,14 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
-#include "menu/MenuWidget.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    _viewport = new Viewport(this);
+    ui->gridLayout->addWidget(_viewport, 0, 0);
 }
 
 MainWindow::~MainWindow()
@@ -16,7 +18,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::SetImage(const QImage &image)
 {
-    // ui->imageLabel->setPixmap(QPixmap::fromImage(image));
+    _viewport->getRenderImage()->setPixmap(QPixmap::fromImage(image));
 }
 
 void MainWindow::showMenu()
