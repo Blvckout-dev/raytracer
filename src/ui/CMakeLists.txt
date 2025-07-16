@@ -1,4 +1,5 @@
 add_subdirectory(components)
+add_subdirectory(viewport)
 add_subdirectory(menu)
 
 set(UI_FILES
