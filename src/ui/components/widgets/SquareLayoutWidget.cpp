@@ -1,4 +1,5 @@
 #include "SquareLayoutWidget.h"
+#include <QChildEvent>
 
 SquareLayoutWidget::SquareLayoutWidget(QWidget *parent) : QWidget(parent)
 {

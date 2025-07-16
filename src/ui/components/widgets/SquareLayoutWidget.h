@@ -3,7 +3,6 @@
 
 #include "SquareLayout.h"
 #include <QWidget>
-#include <QChildEvent>
 
 class SquareLayoutWidget : public QWidget {
     Q_OBJECT
