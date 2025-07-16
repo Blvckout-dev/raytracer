@@ -3,23 +3,14 @@
 
 #include "SquareLayout.h"
 #include <QWidget>
-#include <QTimer>
+#include <QChildEvent>
 
 class SquareLayoutWidget : public QWidget {
     Q_OBJECT
+protected:
+    void childEvent(QChildEvent *event) override;
 public:
-    explicit SquareLayoutWidget(QWidget* parent = nullptr) : QWidget(parent) {
-        auto layout = new SquareLayout(this);
-        setLayout(layout);
-
-        // Defer widget registration until after construction finishes
-        QTimer::singleShot(0, this, [this, layout]() {
-            const auto& children = this->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly);
-            for (QWidget* child : children) {
-                layout->addWidget(child);
-            }
-        });
-    }
+    explicit SquareLayoutWidget(QWidget* parent = nullptr);
 };
 
 #endif
