@@ -25,8 +25,7 @@ void MainWindow::setImage(const QImage &image)
     _viewportWidget->getRenderImage()->setPixmap(QPixmap::fromImage(image));
 }
 
-void MainWindow::showMenu()
+void MainWindow::toggleMenu()
 {
-    auto menu = new MenuWidget(this);
-    ui->gridLayout->addWidget(menu, 0, 0);
+    _menuWidget->setVisible(!_menuWidget->isVisible());
 }

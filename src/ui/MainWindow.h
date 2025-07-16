@@ -24,7 +24,7 @@ public:
     ~MainWindow();
 
     void setImage(const QImage& image);
-    void showMenu();
+    void toggleMenu();
 };
 
 #endif // MAINWINDOW_H
