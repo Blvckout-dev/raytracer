@@ -22,7 +22,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void SetImage(const QImage& image);
+    void setImage(const QImage& image);
     void showMenu();
 };
 

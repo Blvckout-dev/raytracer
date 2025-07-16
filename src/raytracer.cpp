@@ -83,7 +83,7 @@ int main(int argc, char *argv[]) {
     MainWindow w;
     w.show();
 
-    w.SetImage(image);
+    w.setImage(image);
     w.showMenu();
 
     return app.exec();

@@ -16,7 +16,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::SetImage(const QImage &image)
+void MainWindow::setImage(const QImage &image)
 {
     _viewport->getRenderImage()->setPixmap(QPixmap::fromImage(image));
 }
