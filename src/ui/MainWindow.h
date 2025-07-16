@@ -19,6 +19,9 @@ private:
     ViewportWidget* _viewportWidget;
     MenuWidget* _menuWidget;
 
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
