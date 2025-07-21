@@ -24,7 +24,7 @@ void Camera::UpdateViewMatrix()
 
 void Camera::UpdateProjectionMatrix()
 {
-	_projectionMat = perspective<float>(_verticalFovRadians, _aspectRatio, _zNear, _zFar);
+	_projectionMat = perspective(_verticalFovRadians, _aspectRatio, _zNear, _zFar);
 	_inverseProjectionMat = _projectionMat.inversed();
 }
 
