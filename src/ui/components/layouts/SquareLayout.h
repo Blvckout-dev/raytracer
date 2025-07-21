@@ -7,25 +7,26 @@
 
 class SquareLayout : public QLayout {
 private:
-    QList<QLayoutItem*> items;
+    QList<QLayoutItem*> _items;
 
 public:
     explicit SquareLayout(QWidget* parent = nullptr);
-
+    SquareLayout(const SquareLayout&) = delete;
+    SquareLayout& operator=(const SquareLayout&) = delete;
     ~SquareLayout() override;
 
     void addItem(QLayoutItem* item) override;
 
     int count() const override {
-        return items.size();
+        return _items.size();
     }
 
     QLayoutItem* itemAt(int index) const override {
-        return index >= 0 && index < items.size() ? items.at(index) : nullptr;
+        return index >= 0 && index < _items.size() ? _items.at(index) : nullptr;
     }
 
     QLayoutItem* takeAt(int index) override {
-        return index >= 0 && index < items.size() ? items.takeAt(index) : nullptr;
+        return index >= 0 && index < _items.size() ? _items.takeAt(index) : nullptr;
     }
 
     QSize sizeHint() const override;

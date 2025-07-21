@@ -12,19 +12,19 @@ SquareLayout::~SquareLayout() {
 }
 
 void SquareLayout::addItem(QLayoutItem* item) {
-    items.append(item);
+    _items.append(item);
 }
 
 QSize SquareLayout::sizeHint() const {
     QSize size;
-    for (QLayoutItem* item : items)
+    for (QLayoutItem* item : _items)
         size += item->sizeHint();
     return size;
 }
 
 QSize SquareLayout::minimumSize() const {
     QSize size;
-    for (QLayoutItem* item : items)
+    for (QLayoutItem* item : _items)
         size = size.expandedTo(item->minimumSize());
     return size;
 }
@@ -33,7 +33,7 @@ void SquareLayout::setGeometry(const QRect& rect) {
     QLayout::setGeometry(rect);
 
     Qt::LayoutDirection direction = parentWidget()->layoutDirection();
-    int n = items.size();
+    int n = _items.size();
 
     if (n == 0)
         return;
@@ -45,7 +45,7 @@ void SquareLayout::setGeometry(const QRect& rect) {
     int y = rect.y() + (rect.height() - size) / 2;
 
     for (int i = 0; i < n; ++i) {
-        items[i]->setGeometry(QRect(x, y, size, size));
+        _items[i]->setGeometry(QRect(x, y, size, size));
         
         if (direction == Qt::LeftToRight)
             x += size + spacing;
