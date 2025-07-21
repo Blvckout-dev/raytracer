@@ -1,5 +1,5 @@
-#ifndef MENU_H
-#define MENU_H
+#ifndef MENUWIDGET_H
+#define MENUWIDGET_H
 
 #include <QWidget>
 #include <QEasingCurve>
@@ -24,6 +24,8 @@ protected:
 
 public:
     explicit MenuWidget(QWidget* parent = nullptr);
+    MenuWidget(const MenuWidget&) = delete;
+    MenuWidget& operator=(const MenuWidget&) = delete;
     ~MenuWidget();
 
     void toggleMenu();
