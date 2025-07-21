@@ -10,6 +10,11 @@ ViewportWidget::ViewportWidget(QWidget *parent) :
     _renderImage = _ui->imageLabel;
 }
 
+ViewportWidget::~ViewportWidget()
+{
+    delete _ui;
+}
+
 QLabel* ViewportWidget::getRenderImage() const
 {
     return _renderImage;

@@ -16,6 +16,9 @@ private:
     QLabel* _renderImage;
 public:
     explicit ViewportWidget(QWidget* parent = nullptr);
+    ViewportWidget(const ViewportWidget&) = delete;
+    ViewportWidget& operator=(const ViewportWidget&) = delete;
+    ~ViewportWidget();
 
     QLabel* getRenderImage() const;
 };
