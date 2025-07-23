@@ -200,6 +200,7 @@ template<typename T>
 struct Vec<T, 3> : detail::VecBase<T, 3, Vec<T, 3>> {
     union {
         struct { T x, y, z; };
+        struct { T r, g, b; };
         T data[3];
     };
 
@@ -228,6 +229,7 @@ template<typename T>
 struct Vec<T, 4> : detail::VecBase<T, 4, Vec<T, 4>> {
     union {
         struct { T x, y, z, w; };
+        struct { T r, g, b, a; };
         T data[4];
     };
 
