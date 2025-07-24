@@ -4,6 +4,8 @@
 #include "ui/MainWindow.h"
 #include "scene/scene.h"
 #include "render/renderer.h"
+#include "timer/TickTimer.h"
+#include "timer/Stopwatch.h"
 #include <QApplication>
 #include <QImage>
 
@@ -36,6 +38,8 @@ int main(int argc, char *argv[]) {
         Vec3(1.0f, -1.0f, 0.0f)
     );
 
+    MainWindow w;
+
     Scene scene;
     
     scene.addCamera(camera);
@@ -44,20 +48,35 @@ int main(int argc, char *argv[]) {
     scene.Sphere = &sphere;
 
     Renderer renderer(&scene, width, height);
-    renderer.render();
 
-    MainWindow w;
+    QImage image(width, height, QImage::Format_ARGB32);
+
+    std::atomic<bool> isRendering { false };
+    float frameTimeMs {};
+
+    TickTimer tickTimer;
+    Stopwatch stopwatch;
+
+    tickTimer.onTick = [&](double deltaTime) {
+        if (isRendering.exchange(true)) return;
+
+        stopwatch.restart();
+
+        renderer.render();
+        std::memcpy(image.bits(), renderer.getPixelBuffer().data(), renderer.getPixelBuffer().size() * sizeof(uint32_t));
+
+        QMetaObject::invokeMethod(&w, [wPtr = &w, image]() {
+            wPtr->setImage(image);
+        }, Qt::QueuedConnection);
+
+        qDebug() << "Frame render time [ms]:" << stopwatch.elapsedMs();
+
+        isRendering.store(false);
+    };
+
+    tickTimer.start();
+
     w.show();
-
-    QImage image(
-        reinterpret_cast<const uchar*>(renderer.getPixelBuffer().data()),
-        width,
-        height,
-        width * sizeof(uint32_t),
-        QImage::Format_ARGB32
-    );
-
-    w.setImage(image);
 
     return app.exec();
 }
